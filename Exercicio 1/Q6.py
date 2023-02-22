@@ -1,12 +1,11 @@
 import requests
 from bs4 import BeautifulSoup
 
-url = 'https://openai.com/blog/chatgpt/'
+url = 'https://www.meutimao.com.br/tabela-de-classificacao/campeonato_brasileiro/'
+
 response = requests.get(url)
 html = response.content
 soup = BeautifulSoup(html, 'html.parser')
-links = soup.find_all('a')
+tabela = soup.find_all('table')
 
-for link in links:
-    texto = link.getText('href')
-    print('-', texto)
+print(tabela)
