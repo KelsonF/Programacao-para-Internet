@@ -50,7 +50,7 @@ def search(url, keyword, depth):
                 continue
             except requests.exceptions.InvalidSchema:
                 continue
-            
+
         depth = depth-1
 
     sorted_pages = sorted(page_rank.items(), key=lambda x: x[1], reverse=True)
@@ -58,4 +58,4 @@ def search(url, keyword, depth):
     for page, rank in sorted_pages:
         print(f"{page} - referências: {rank}")
      
-search(url, 'brasil', 1)
+search(url, keyword, 1)
