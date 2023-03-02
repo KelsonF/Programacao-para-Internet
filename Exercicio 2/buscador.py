@@ -2,6 +2,7 @@ from bs4 import BeautifulSoup
 import requests_cache
 import requests
 
+keyword = str(input('Digite a palavra que deseja: '))
 url = 'https://www.bbc.com/portuguese'
 requests_cache.install_cache('search_cache')
 
@@ -19,7 +20,7 @@ def busca_termo(keyword, text):
 def search(url, keyword, depth):
     response = requests.get(url)
     html = BeautifulSoup(response.text, 'html.parser')
-    texto = html.get_text()
+    texto = html.get_text().lower()
 
     busca_termo(keyword, texto)
 
@@ -54,4 +55,4 @@ def search(url, keyword, depth):
     for page, rank in sorted_pages:
         print(f"{page} - referências: {rank}")
      
-search(url, 'brasil', 1)
+search(url, 'brasil', 0)
