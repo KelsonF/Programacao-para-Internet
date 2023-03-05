@@ -7,7 +7,6 @@ keyword = str(input('Digite a palavra que deseja: '))
 url = 'https://www.bbc.com/portuguese'
 requests_cache.install_cache('search_cache')
 
-
 def busca_termo(text):
     for termo in text:
         texto = termo.get_text()
@@ -35,7 +34,7 @@ def search(url, keyword, depth):
                     page_rank[next_url] = 1
                     
 
-    while depth > 0:
+    if depth > 0:
         links = html.find_all('a')
         for link in links:
             try:
@@ -51,11 +50,9 @@ def search(url, keyword, depth):
             except requests.exceptions.InvalidSchema:
                 continue
 
-        depth = depth-1
-
     sorted_pages = sorted(page_rank.items(), key=lambda x: x[1], reverse=True)
     print("Páginas ranqueadas:")
     for page, rank in sorted_pages:
         print(f"{page} - referências: {rank}")
      
-search(url, keyword, 1)
+search(url, keyword, 2)
